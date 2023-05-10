@@ -2,24 +2,12 @@ name: 'integration_tests'
 version: '1.0.0'
 config-version: 2
 
-profile: 'default'
-
-
+profile: 'tuva-snowflake'
 
 vars:
 
-
-### optional overrides for sources only for integration_tests
-#  claims_preprocessing_input_database: dev_ci_testing
-  claims_preprocessing_input_schema: claims_data_model
-
-#  tuva_database: yabbadabba
-#  tuva_schema_prefix: test
-
-
-dispatch:
-  - macro_namespace: dbt
-    search_order: [ 'the_tuva_project', 'dbt']
+  input_database: dev_aaron
+  input_schema: tuva_synthetic
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -28,18 +16,19 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-
-
 target-path: "target"
 clean-targets:
   - "target"
   - "dbt_packages"
 
-
+seeds:
+  +database: dev_aaron3
 
 models:
   integration_tests:
     +materialized: ephemeral
-#  the_tuva_project:
-#    +database: tuva_test
+  the_tuva_project:
+    +database: claims_data_profiling
+
+
   

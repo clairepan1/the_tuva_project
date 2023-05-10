@@ -1,1 +1,1 @@
-select * from {{source('claims_input','medical_claim')}}
+select * from {{source('raw_input_layer','medical_claim')}}
