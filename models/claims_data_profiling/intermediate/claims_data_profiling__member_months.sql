@@ -7,7 +7,7 @@ with src as
               enrollment_end_date as end_date,
               payer,
               payer_type
-          from {{ ref('input_layer__eligibility') }} 
+          from {{ ref('eligibility') }} 
          )
 , months as (
     select 1 as month

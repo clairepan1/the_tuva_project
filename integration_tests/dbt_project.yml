@@ -6,7 +6,7 @@ profile: 'tuva-snowflake'
 
 vars:
 
-  input_database: dev_aaron
+  input_database: tuva_project_demo
   input_schema: tuva_synthetic
 
 model-paths: ["models"]
@@ -21,16 +21,13 @@ clean-targets:
   - "target"
   - "dbt_packages"
 
-seeds:
-  +database: dev_aaron3
-
 models:
   integration_tests:
     +materialized: ephemeral
   the_tuva_project:
     +database: claims_data_profiling
     claims_data_profiling:
-      +schema: tuva_synthetic
+      +schema: dates
 
 
   

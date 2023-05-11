@@ -5,7 +5,7 @@ select
   min(dispensing_date) as dispensing_date
 , min(paid_date) as paid_date
 , claim_id
-from {{ ref('input_layer__pharmacy_claim') }} 
+from {{ ref('pharmacy_claim') }} 
 group by claim_id
 )
 

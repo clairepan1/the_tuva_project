@@ -2,49 +2,49 @@
 
 with claim_start as (
 select claim_id
-from {{ ref('input_layer__medical_claim') }} 
+from {{ ref('medical_claim') }} 
 group by claim_id
 having count(distinct claim_start_date) > 1
 )
 
 , claim_end as (
 select claim_id
-from {{ ref('input_layer__medical_claim') }} 
+from {{ ref('medical_claim') }} 
 group by claim_id
 having count(distinct claim_end_date) > 1
 )
 
 , admission_date as (
 select claim_id
-from {{ ref('input_layer__medical_claim') }} 
+from {{ ref('medical_claim') }} 
 group by claim_id
 having count(distinct admission_date) > 1
 )
 
 , discharge_date as (
 select claim_id
-from {{ ref('input_layer__medical_claim') }} 
+from {{ ref('medical_claim') }} 
 group by claim_id
 having count(distinct discharge_date) > 1
 )
 
 , med_paid_date as (
 select claim_id
-from {{ ref('input_layer__medical_claim') }} 
+from {{ ref('medical_claim') }} 
 group by claim_id
 having count(distinct paid_date) > 1
 )
 
 , dispensing_date as (
 select claim_id
-from {{ ref('input_layer__pharmacy_claim') }} 
+from {{ ref('pharmacy_claim') }} 
 group by claim_id
 having count(distinct dispensing_date) > 1
 )
 
 , rx_paid_date as (
 select claim_id
-from {{ ref('input_layer__medical_claim') }} 
+from {{ ref('medical_claim') }} 
 group by claim_id
 having count(distinct paid_date) > 1
 )
