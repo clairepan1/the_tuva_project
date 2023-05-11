@@ -8,7 +8,7 @@ select
 , min(discharge_date) as discharge_date
 , min(paid_date) as paid_date
 , claim_id
-from {{ ref('input_layer__medical_claim') }} 
+from {{ ref('medical_claim') }} 
 group by claim_id
 )
 

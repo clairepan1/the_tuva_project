@@ -29,6 +29,8 @@ models:
     +materialized: ephemeral
   the_tuva_project:
     +database: claims_data_profiling
+    claims_data_profiling:
+      +schema: tuva_synthetic
 
 
   

@@ -1,1 +1,1 @@
-select * from {{source('raw_input_layer','pharmacy_claim')}}
+select * from {{source('claims_input','pharmacy_claim')}}
