@@ -1,10 +1,22 @@
 select 
-  claim_id
-, patient_id
-, claim_start_date
-, claim_end_date
-, admission_date
-, discharge_date
-, paid_date
-
+ADMISSION_DATE,
+ADMIT_SOURCE_CODE,
+ADMIT_TYPE_CODE,
+APR_DRG_CODE,
+BILL_TYPE_CODE,
+CLAIM_END_DATE,
+CLAIM_ID,
+CLAIM_LINE_NUMBER,
+CLAIM_START_DATE,
+CLAIM_TYPE,
+DISCHARGE_DATE,
+DISCHARGE_DISPOSITION_CODE,
+FACILITY_NPI,
+MS_DRG_CODE,
+PATIENT_ID,
+REVENUE_CENTER_CODE,
+DATA_SOURCE,
+place_of_service_code,
+claim_line_start_date,
+claim_line_end_date
 from {{source('claims_input','medical_claim')}}

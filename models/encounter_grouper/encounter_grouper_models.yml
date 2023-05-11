@@ -3,14 +3,14 @@ version: 2
 
 models:
 
-  - name: claims_preprocessing__encounter_grouper
+  - name: encounter_grouper__encounter_grouper
     description: Add all relevant encounter data to medical_claim_table
     config:
       schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
+        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_encounter_grouper
+        {% else %}encounter_grouper{%- endif -%}
       alias: encounter_grouper
-      tags: claims_preprocessing
+      tags: encounter_grouper
       materialized: table
     columns:
       - name: claim_id
@@ -58,112 +58,90 @@ models:
       - name: data_source
         description: User-configured field that indicates the data source (e.g. typically named after the payer and state "BCBS Tennessee").
 
-
-
-  - name: claims_preprocessing__service_categories
-    description: Assigns service categories to claim lines
-    config:
-      schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
-      alias: service_categories
-      tags: claims_preprocessing
-      materialized: table
-    columns:
-      - name: claim_id
-        description: Unique identifier for each claim.
-      - name: claim_line_number
-        description: Indicates the line number for the particular line of the claim.
-      - name: service_category_1
-        description: The first service category of the claim line
-      - name: service_category_2
-        description: The second, more specific service category of the claim line
-
-
   ### Intermediate
 
-  - name: claims_preprocessing__acute_inpatient_institutional_claims
+  - name: encounter_grouper__acute_inpatient_institutional_claims
     description: All acute inpatient institutional claim_ids with header values and data quality flags
     config:
       schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
+        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_encounter_grouper
+        {% else %}encounter_grouper{%- endif -%}
       alias: _int_acute_inpatient_institutional_claims
-      tags: claims_preprocessing
+      tags: encounter_grouper
       materialized: table
 
 
-  - name: claims_preprocessing__acute_inpatient_data_quality_summary
+  - name: encounter_grouper__acute_inpatient_data_quality_summary
     description: Summary of data quality issues with acute inpatient claims
     config:
       schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
+        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_encounter_grouper
+        {% else %}encounter_grouper{%- endif -%}
       alias: _int_acute_inpatient_data_quality_summary
-      tags: claims_preprocessing
+      tags: encounter_grouper
       materialized: table
 
 
-  - name: claims_preprocessing__acute_inpatient_institutional_encounter_id
+  - name: encounter_grouper__acute_inpatient_institutional_encounter_id
     description: Assigns encounter_id to every acute inpatient institutional claim
     config:
       schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
+        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_encounter_grouper
+        {% else %}encounter_grouper{%- endif -%}
       alias: _int_acute_inpatient_institutional_encounter_id
-      tags: claims_preprocessing
+      tags: encounter_grouper
 
 
-  - name: claims_preprocessing__acute_inpatient_encounter_start_and_end_dates
+  - name: encounter_grouper__acute_inpatient_encounter_start_and_end_dates
     description: Defines encounter start and end dates for acute inpatient encounters
     config:
       schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
+        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_encounter_grouper
+        {% else %}encounter_grouper{%- endif -%}
       alias: _int_acute_inpatient_encounter_start_and_end_dates
-      tags: claims_preprocessing
+      tags: encounter_grouper
       materialized: table
 
 
-  - name: claims_preprocessing__acute_inpatient_professional_encounter_id
+  - name: encounter_grouper__acute_inpatient_professional_encounter_id
     description: Assigns encounter_id to every acute inpatient professional claim
     config:
       schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
+        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_encounter_grouper
+        {% else %}encounter_grouper{%- endif -%}
       alias: _int_acute_inpatient_professional_encounter_id
-      tags: claims_preprocessing
+      tags: encounter_grouper
       materialized: table
 
 
-  - name: claims_preprocessing__acute_inpatient_encounter_id
+  - name: encounter_grouper__acute_inpatient_encounter_id
     description: Fix encounter_id so each professional claim can only belong to one encounter
     config:
       schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
+        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_encounter_grouper
+        {% else %}encounter_grouper{%- endif -%}
       alias: _int_acute_inpatient_encounter_id
-      tags: claims_preprocessing
+      tags: encounter_grouper
       materialized: view
 
 
-  - name: claims_preprocessing__acute_inpatient_claims_with_encounter_data
+  - name: encounter_grouper__acute_inpatient_claims_with_encounter_data
     description: Add all relevant encounter data to each acute inpatient claim_id
     config:
       schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
+        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_encounter_grouper
+        {% else %}encounter_grouper{%- endif -%}
       alias: _int_acute_inpatient_claims_with_encounter_data
-      tags: claims_preprocessing
+      tags: encounter_grouper
       materialized: table
 
 
-  - name: claims_preprocessing__encounter_data_for_medical_claims
+  - name: encounter_grouper__encounter_data_for_medical_claims
     description: All encounter-related fields that will be added to medical_claim
     config:
       schema: |
-        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
-        {% else %}claims_preprocessing{%- endif -%}
+        {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_encounter_grouper
+        {% else %}encounter_grouper{%- endif -%}
       alias: _int_encounter_data_for_medical_claims
-      tags: claims_preprocessing
+      tags: encounter_grouper
       materialized: view

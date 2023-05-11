@@ -44,15 +44,15 @@ select
   cc.encounter_start_date,
   cc.encounter_end_date
 
-from {{ ref('claims_preprocessing__acute_inpatient_institutional_claims') }} aa
+from {{ ref('encounter_grouper__acute_inpatient_institutional_claims') }} aa
 
 left join
-{{ ref('claims_preprocessing__acute_inpatient_encounter_id') }} bb
+{{ ref('encounter_grouper__acute_inpatient_encounter_id') }} bb
 on aa.claim_id = bb.claim_id
 and aa.patient_id = bb.patient_id
 
 left join
-{{ ref('claims_preprocessing__acute_inpatient_encounter_start_and_end_dates') }} cc
+{{ ref('encounter_grouper__acute_inpatient_encounter_start_and_end_dates') }} cc
 on bb.encounter_id = cc.encounter_id
 and bb.patient_id = cc.patient_id
 ),

@@ -49,7 +49,7 @@ select
 -- they overlap with more than one encounter:
   0 as orphan_claim_flag,
   1 as encounter_count
-from {{ ref('claims_preprocessing__acute_inpatient_claims_with_encounter_data') }}
+from {{ ref('encounter_grouper__acute_inpatient_claims_with_encounter_data') }}
 ),
 
 
@@ -76,7 +76,7 @@ select
   orphan_claim_flag,
   encounter_count
   
-from {{ ref('claims_preprocessing__acute_inpatient_professional_encounter_id') }}
+from {{ ref('encounter_grouper__acute_inpatient_professional_encounter_id') }}
 where (orphan_claim_flag = 1) or (encounter_count > 1)
 )
 

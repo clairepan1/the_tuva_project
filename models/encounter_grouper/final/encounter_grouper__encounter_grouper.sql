@@ -21,7 +21,7 @@ select
   aa.claim_line_number,
   aa.claim_type,
   aa.patient_id,
-  aa.member_id,
+  -- aa.member_id,
 -- Add service categories:
   cc.service_category_1,
   cc.service_category_2,  
@@ -38,15 +38,15 @@ select
   bb.orphan_claim_flag,
   bb.encounter_count,
   aa.data_source
-from {{ ref('input_layer__medical_claim') }} aa
+from {{ ref('medical_claim') }} aa
 
 left join
-{{ ref('claims_preprocessing__encounter_data_for_medical_claims') }} bb
+{{ ref('encounter_grouper__encounter_data_for_medical_claims') }} bb
 on aa.claim_id = bb.claim_id
 and aa.patient_id = bb.patient_id
 
 left join
-{{ ref('claims_preprocessing__service_categories') }} cc
+{{ ref('service_category__service_category') }} cc
 on aa.claim_id = cc.claim_id
 and aa.claim_line_number = cc.claim_line_number
 

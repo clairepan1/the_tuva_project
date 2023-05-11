@@ -30,7 +30,7 @@ select
     partition by patient_id
     order by end_date, start_date, claim_id 
   ) as row_num
-from {{ ref('claims_preprocessing__acute_inpatient_institutional_claims') }}
+from {{ ref('encounter_grouper__acute_inpatient_institutional_claims') }}
 ),
 
 

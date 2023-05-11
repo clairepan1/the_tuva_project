@@ -26,9 +26,9 @@ select
   aip.start_date as start_date,
   aip.end_date as end_date,
   eid.encounter_id as encounter_id
-from {{ ref('claims_preprocessing__acute_inpatient_institutional_claims') }} aip
+from {{ ref('encounter_grouper__acute_inpatient_institutional_claims') }} aip
 left join
-{{ ref('claims_preprocessing__acute_inpatient_institutional_encounter_id') }} eid
+{{ ref('encounter_grouper__acute_inpatient_institutional_encounter_id') }} eid
 on aip.patient_id = eid.patient_id
 and aip.claim_id = eid.claim_id
 ),

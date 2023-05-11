@@ -20,7 +20,7 @@
 
 with room_and_board_rev_code_claims as (
 select distinct claim_id
-from {{ ref('input_layer__medical_claim') }}
+from {{ ref('medical_claim') }}
 where revenue_center_code in
   ('0100','0101',
    '0110','0111','0112','0113','0114','0116','0117','0118','0119',
@@ -39,7 +39,7 @@ where revenue_center_code in
 
 valid_drg_claims as (
 select distinct claim_id
-from {{ ref('input_layer__medical_claim') }} mc
+from {{ ref('medical_claim') }} mc
 
 left join {{ ref('terminology__ms_drg')}} msdrg
 on mc.ms_drg_code = msdrg.ms_drg_code
@@ -50,7 +50,7 @@ where (msdrg.ms_drg_code is not null)
 
 ed_rev_code_claims as (
 select distinct claim_id
-from {{ ref('input_layer__medical_claim') }}
+from {{ ref('medical_claim') }}
 where revenue_center_code in ('0450','0451','0452','0459','0981')
 -- 0456, urgent care, is included in most published definitions
 -- that also include a requirement of a bill type code for
@@ -60,7 +60,7 @@ where revenue_center_code in ('0450','0451','0452','0459','0981')
 
 urgent_care_rev_code_claims as (
 select distinct claim_id
-from {{ ref('input_layer__medical_claim') }}
+from {{ ref('medical_claim') }}
 where revenue_center_code = '0456'
 ),
 
@@ -118,7 +118,7 @@ select distinct
       else 'Other' 
     end as service_category_2
 	
-from {{ ref('input_layer__medical_claim') }}
+from {{ ref('medical_claim') }}
 where claim_type = 'institutional'
 
 union all
@@ -155,7 +155,7 @@ select
         else 'Other'
         end
         as service_category_2
-from {{ ref('input_layer__medical_claim') }}
+from {{ ref('medical_claim') }}
 where claim_type = 'professional'
 )
 

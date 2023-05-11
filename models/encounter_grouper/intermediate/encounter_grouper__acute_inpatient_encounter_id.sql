@@ -25,7 +25,7 @@ select
   patient_id,
   claim_id,
   encounter_id
-from {{ ref('claims_preprocessing__acute_inpatient_institutional_encounter_id') }}
+from {{ ref('encounter_grouper__acute_inpatient_institutional_encounter_id') }}
 
 union distinct
 
@@ -33,5 +33,5 @@ select
   patient_id,
   claim_id,
   encounter_id
-from {{ ref('claims_preprocessing__acute_inpatient_professional_encounter_id') }}
+from {{ ref('encounter_grouper__acute_inpatient_professional_encounter_id') }}
 where (orphan_claim_flag = 0) and (encounter_count = 1)

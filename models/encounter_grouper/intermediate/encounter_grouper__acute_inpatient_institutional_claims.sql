@@ -19,7 +19,7 @@
 
 with room_and_board_requirement as (
 select distinct claim_id
-from {{ ref('input_layer__medical_claim') }} 
+from {{ ref('medical_claim') }} 
 where revenue_center_code in
   ('0100','0101',
    '0110','0111','0112','0113','0114','0116','0117','0118','0119',
@@ -38,7 +38,7 @@ where revenue_center_code in
 
 drg_requirement as (
 select distinct claim_id
-from {{ ref('input_layer__medical_claim') }} mc
+from {{ ref('medical_claim') }} mc
 
 left join {{ ref('terminology__ms_drg')}} msdrg
 on mc.ms_drg_code = msdrg.ms_drg_code
@@ -53,7 +53,7 @@ where (msdrg.ms_drg_code is not null)
 
 bill_type_requirement as (
 select distinct claim_id
-from {{ ref('input_layer__medical_claim') }}
+from {{ ref('medical_claim') }}
 where left(bill_type_code,2) in ('11','12') 
 ),
 
@@ -65,8 +65,6 @@ select
   mc.claim_line_number,
   mc.claim_start_date,
   mc.claim_end_date,
-  mc.claim_line_start_date,
-  mc.claim_line_end_date,
   mc.admission_date,
   mc.discharge_date,
   mc.admit_source_code,
@@ -76,7 +74,7 @@ select
   mc.claim_type,
   mc.data_source
 
-from {{ ref('input_layer__medical_claim') }} mc
+from {{ ref('medical_claim') }} mc
 
 inner join room_and_board_requirement rb
 on mc.claim_id = rb.claim_id
@@ -229,22 +227,18 @@ select
   max(facility_npi) as facility_npi,
   max(claim_type) as claim_type,
   coalesce(min(admission_date),
-           min(claim_start_date),
-           min(claim_line_start_date) ) as start_date,
+           min(claim_start_date)) as start_date,
   coalesce(max(discharge_date),
-           max(claim_end_date),
-           max(claim_line_end_date) ) as end_date,
+           max(claim_end_date)) as end_date,
   case
     when min(admission_date) is not null then 'admission_date'
     when min(claim_start_date) is not null then 'claim_start_date'
-    when min(claim_line_start_date) is not null then 'claim_line_start_date'
     else null
   end as date_used_as_start_date,
   
   case
     when max(discharge_date) is not null then 'discharge_date'
     when max(claim_end_date) is not null then 'claim_end_date'
-    when max(claim_line_end_date) is not null then 'claim_line_end_date'
     else null
   end as date_used_as_end_date,
     data_source
