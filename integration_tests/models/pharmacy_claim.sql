@@ -1,6 +1,2 @@
-select
-  claim_id
-, patient_id
-, dispensing_date
-, paid_date
+select *
 from {{source('claims_input','pharmacy_claim')}}
