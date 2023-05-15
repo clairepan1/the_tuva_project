@@ -10,7 +10,10 @@ vars:
   input_schema: tuva_synthetic
 
   ## All Data Marts
-  tuva_marts_enabled: true
+  tuva_marts_enabled: false
+
+  input_layer_enabled: false
+  data_profiling_enabled: false
 
   ## Claims Preprocessing
   member_months_enabled: true
