@@ -1,3 +1,8 @@
+{{ config(
+     enabled = var('ccsr_enabled',var('tuva_marts_enabled',True))
+   )
+}}
+
 {% set categories_list = dbt_utils.get_column_values(
         table=ref("ccsr__dx_vertical_pivot"),
         column="ccsr_category",

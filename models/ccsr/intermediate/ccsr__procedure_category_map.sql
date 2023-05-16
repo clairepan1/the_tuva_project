@@ -1,3 +1,8 @@
+{{ config(
+     enabled = var('ccsr_enabled',var('tuva_marts_enabled',True))
+   )
+}}
+
 select 
     icd_10_pcs as code,
     icd_10_pcs_description as code_description,

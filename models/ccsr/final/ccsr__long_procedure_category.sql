@@ -1,3 +1,8 @@
+{{ config(
+     enabled = var('ccsr_enabled',var('tuva_marts_enabled',True))
+   )
+}}
+
 with procedure as (
     
     select * from {{ ref('core__procedure') }}
