@@ -10,27 +10,26 @@ vars:
   input_schema: tuva_synthetic
 
   ## All Data Marts
-  tuva_marts_enabled: false
+  tuva_marts_enabled: true
 
-  input_layer_enabled: false
-  data_profiling_enabled: false
+  # ## Claims Data Marts
+  # member_months_enabled: true
+  # service_category_grouper_enabled: true
+  # encounter_grouper_enabled: true
+  # pmpm_enabled: true
+  # data_profiling_enabled: true
+  # claims_date_profiling_enabled: true
+  # ## cms_hccs_enabled: false
 
-  ## Claims Preprocessing
-  member_months_enabled: true
-  service_category_grouper_enabled: true
-  encounter_grouper_enabled: true
-  pmpm_enabled: true
+  # ## Core Data Model
+  # core_enabled: true
 
-  ## Claims Profiling
-  claims_date_profiling_enabled: true
-
-  core_enabled: true
-
-  readmissions_enabled: true
-  cms_chronic_conditions_enabled: true
-  tuva_chronic_conditions_enabled: true
-
-
+  # ## High-level Data Marts
+  # readmissions_enabled: true
+  # cms_chronic_conditions_enabled: true
+  # tuva_chronic_conditions_enabled: true
+  # ## ccsr_enabled: false
+  # ## emergency_department_enabled: false
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
