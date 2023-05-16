@@ -1,5 +1,5 @@
 {{ config(
-     enabled = var('claims_preprocessing_enabled',var('tuva_marts_enabled',True))
+     enabled = var('encounter_grouper_enabled',var('tuva_marts_enabled',True))
    )
 }}
 
@@ -46,7 +46,7 @@ on aa.claim_id = bb.claim_id
 and aa.patient_id = bb.patient_id
 
 left join
-{{ ref('service_category__service_category') }} cc
+{{ ref('service_category') }} cc
 on aa.claim_id = cc.claim_id
 and aa.claim_line_number = cc.claim_line_number
 

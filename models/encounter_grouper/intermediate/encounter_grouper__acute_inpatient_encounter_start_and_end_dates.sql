@@ -1,5 +1,5 @@
 {{ config(
-     enabled = var('claims_preprocessing_enabled',var('tuva_marts_enabled',True))
+     enabled = var('encounter_grouper_enabled',var('tuva_marts_enabled',True))
    )
 }}
 

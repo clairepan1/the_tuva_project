@@ -12,9 +12,9 @@
 
 with table_without_descriptions as (
 select
-  aa.encounter_id,
+  eg.encounter_id,
   max(aa.patient_id) as patient_id,
-  max(aa.encounter_type) as encounter_type,
+  max(eg.encounter_type) as encounter_type,
   max(eg.encounter_start_date) as encounter_start_date,
   max(eg.encounter_end_date) as encounter_end_date,
    max(eg.encounter_admit_source_code) as encounter_admit_source_code,
@@ -31,14 +31,14 @@ select
   sum(aa.charge_amount) as charge_amount,
   sum(aa.total_cost_amount) as total_cost_amount,
   max(aa.data_source) as data_source
-from {{ ref('core__medical_claim') }} aa
+from {{ ref('medical_claim') }} aa
 left join {{ ref('encounter_grouper__encounter_grouper')}} as eg
     on  aa.claim_id = eg.claim_id
     and aa.claim_line_number = eg.claim_line_number
     and aa.patient_id = eg.patient_id
 --         and aa.data_source = eg.data_source
-where aa.encounter_id is not null
-group by aa.encounter_id
+where eg.encounter_id is not null
+group by eg.encounter_id
 ),
 
 

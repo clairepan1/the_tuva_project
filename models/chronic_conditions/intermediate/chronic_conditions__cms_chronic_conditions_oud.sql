@@ -54,7 +54,7 @@ patient_medications as (
         , cast(paid_date as date) as encounter_start_date
         , replace(ndc_code,'.','') as ndc_code
         , data_source
-    from {{ ref('core__pharmacy_claim') }}
+    from {{ ref('pharmacy_claim') }}
 
 
 ),

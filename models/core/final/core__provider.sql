@@ -12,17 +12,17 @@
 
 with all_providers_in_claims_dataset as (
 select distinct facility_npi as npi
-from {{ ref('core__medical_claim') }}
+from {{ ref('medical_claim') }}
 
 union all
 
 select distinct rendering_npi as npi
-from {{ ref('core__medical_claim') }}
+from {{ ref('medical_claim') }}
 
 union all
 
 select distinct billing_npi as npi
-from {{ ref('core__medical_claim') }}
+from {{ ref('medical_claim') }}
 ),
 
 

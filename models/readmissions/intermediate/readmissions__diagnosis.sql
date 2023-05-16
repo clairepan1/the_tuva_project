@@ -10,11 +10,13 @@
 
 with acute_institutional_claims as (
 select distinct
-    encounter_id
-,   claim_id
-from {{ ref('core__medical_claim') }}
-where encounter_type = 'acute inpatient'
-    and claim_type = 'institutional'
+    b.encounter_id
+,   a.claim_id
+from {{ ref('medical_claim') }} a
+inner join {{ ref('encounter_grouper__encounter_grouper') }} b
+    on a.claim_id = b.claim_id
+where b.encounter_type = 'acute inpatient'
+    and a.claim_type = 'institutional'
 )
 
 select distinct

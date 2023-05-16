@@ -3,14 +3,15 @@ version: 2
 
 models:
 
-  - name: service_category__service_category
+  - name: service_category
     description: Assigns service categories to claim lines
     config:
       schema: |
         {%- if var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_claims_preprocessing
         {% else %}claims_preprocessing{%- endif -%}
       alias: service_category
-      tags: service_category
+      tags: 
+        - claims_preprocessing
       materialized: table
     columns:
       - name: claim_id
