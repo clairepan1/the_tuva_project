@@ -1,2 +1,2 @@
-select patient_id
+select *
 from {{source('claims_input','eligibility')}}
