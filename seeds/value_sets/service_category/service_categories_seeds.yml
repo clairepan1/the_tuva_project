@@ -10,3 +10,8 @@ seeds:
       tags:
         - service_category
       enabled: "{{ var('service_category_grouper_enabled',var('tuva_marts_enabled',True)) }}"
+      column_types:
+        service_category_1: |
+          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+        service_category_2: |
+          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}

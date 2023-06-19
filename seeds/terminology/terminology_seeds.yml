@@ -34,6 +34,38 @@ seeds:
         admit_type_description : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
 
+  - name: terminology__ansi_fips_state
+    config:
+      schema: |
+        {%- if  var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_terminology{% else %}terminology{%- endif -%}
+      alias: ansi_fips_state
+      tags:
+        - terminology
+        - medicare_cclf_connector
+      column_types:
+        ansi_fips_state_code : |
+          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+        ansi_fips_state_abbreviation : |
+          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+        ansi_fips_state_name : |
+          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
+  - name: terminology__apr_drg
+    config:
+      schema: |
+        {%- if  var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_terminology{% else %}terminology{%- endif -%}
+      alias: apr_drg
+      tags:
+        - terminology
+        - data_profiling
+      column_types:
+        apr_drg_code : |
+          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+        severity : |
+          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+        apr_drg_description : |
+          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
 
   - name: terminology__bill_type
     config:
@@ -87,9 +119,7 @@ seeds:
         - terminology
         - data_profiling
       column_types:
-        claim_type_code : |
-          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-        claim_type_description : |
+        claim_type: |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
 
 
@@ -102,8 +132,10 @@ seeds:
         - terminology
         - data_profiling
       column_types:
-        description : |
+        code_type : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
   - name: terminology__discharge_disposition
     config:
       schema: |
@@ -114,6 +146,8 @@ seeds:
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
         discharge_disposition_description : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
   - name: terminology__encounter_type
     config:
       schema: |
@@ -123,8 +157,10 @@ seeds:
         - terminology
         - claims_preprocessing
       column_types:
-        description : |
+        encounter_type : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
   - name: terminology__ethnicity
     config:
       schema: |
@@ -136,6 +172,8 @@ seeds:
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
         description : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
   - name: terminology__fips_county
     config:
       schema: |
@@ -149,21 +187,8 @@ seeds:
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
         state : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-  - name: terminology__ansi_fips_state
-    config:
-      schema: |
-        {%- if  var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_terminology{% else %}terminology{%- endif -%}
-      alias: ansi_fips_state
-      tags:
-        - terminology
-        - medicare_cclf_connector
-      column_types:
-        ansi_fips_state_code : |
-          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-        ansi_fips_state_abbreviation : |
-          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-        ansi_fips_state_name : |
-          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
   - name: terminology__gender
     config:
       schema: |
@@ -173,8 +198,10 @@ seeds:
         - terminology
         - data_profiling
       column_types:
-        description : |
+        gender : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
   - name: terminology__hcpcs_level_2
     config:
       schema: |
@@ -261,7 +288,7 @@ seeds:
       column_types:
         mdc_code : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-        mcd_description : |
+        mdc_description : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
 
 
@@ -366,6 +393,8 @@ seeds:
       column_types:
         payer_type : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
   - name: terminology__place_of_service
     config:
       schema: |
@@ -380,6 +409,8 @@ seeds:
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
         place_of_service_description : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
   - name: terminology__present_on_admission
     config:
       schema: |
@@ -392,7 +423,7 @@ seeds:
       column_types:
         present_on_admit_code : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-        description : |
+        present_on_admit_description : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
 
   - name: terminology__provider
@@ -446,6 +477,7 @@ seeds:
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
         race_description : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+  
   - name: terminology__revenue_center
     config:
       schema: |
@@ -458,20 +490,8 @@ seeds:
       column_types:
         revenue_center_code : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-        description : |
+        revenue_center_description : |
           {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-  - name: terminology__apr_drg
-    config:
-      schema: |
-        {%- if  var('tuva_schema_prefix',None) != None -%}{{var('tuva_schema_prefix')}}_terminology{% else %}terminology{%- endif -%}
-      alias: apr_drg
-      tags:
-        - terminology
-        - data_profiling
-      column_types:
-        apr_drg_code : |
-          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-        severity : |
-          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
-        apr_drg_description : |
-          {%- if target.type == "bigquery" -%} string {%- else -%} varchar {%- endif -%}
+
+
+
