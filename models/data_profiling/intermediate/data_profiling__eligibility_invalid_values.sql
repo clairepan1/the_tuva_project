@@ -36,8 +36,8 @@ with valid_gender as(
         , '{{ var('last_update')}}' as last_update
     from {{ ref('eligibility') }} elig
     left join {{ ref('terminology__race') }} race
-        on elig.race = race.description
-    where race.description is null
+        on elig.race = race.race_description
+    where race.race_description is null
     and elig.race is not null
     group by
         patient_id
